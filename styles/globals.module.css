@@ -1,0 +1,26 @@
+.imghero{
+  display: flex;
+  justify-content: center;
+  background-color: #333;
+  background-image: url(../public/banner.jpg);
+  background-size: cover;
+  background-position: center center;
+  position: relative;
+  width: 85%;
+  height: 500px;
+  border-radius: 15px;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  box-shadow: 1px 1px 40px 1px #333;
+  transition: .3s ease-out;
+}
+
+.imghero:hover{
+  transform: scale(1.02);
+  box-shadow: none;
+}
+
+.divCenter{
+  display: flex;
+  justify-content: center;
+}
