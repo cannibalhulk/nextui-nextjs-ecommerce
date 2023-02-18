@@ -1,6 +1,7 @@
 // 1. import `NextUIProvider` component
 import { NextUIProvider, createTheme } from '@nextui-org/react'
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
+import { CartProvider } from "../modules/AppContext";
 
 export  const lightTheme = createTheme({
   type: 'light',
@@ -49,7 +50,9 @@ function MyApp({ Component, pageProps }) {
     }}
     >
       <NextUIProvider>
-        <Component {...pageProps} />
+        <CartProvider>
+          <Component {...pageProps} />
+        </CartProvider>
       </NextUIProvider>
     </NextThemesProvider>
   )
