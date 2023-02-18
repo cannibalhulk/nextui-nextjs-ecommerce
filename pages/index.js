@@ -1,9 +1,26 @@
 import Navbarr from "@/components/Navbarr";
 import Head from 'next/head'
 import HeroBanner from "@/components/HeroBanner";
-import { Spacer } from "@nextui-org/react";
+import ProductCard from "@/components/ProductCard";
+import { Spacer, Grid } from "@nextui-org/react";
 
-export default function Home() {
+
+export const getServerSideProps = async () => {
+  try {
+    const res = await fetch("https://dummyjson.com/products?limit=8");
+    const { products } = await res.json();
+    return {
+      props: { products },
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      props: { products: [] },
+    };
+  }
+};
+
+export default function Home({ products }) {
   return (
     <>
         <Head>
@@ -12,9 +29,19 @@ export default function Home() {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <Navbarr/>
-        <Spacer y={1}/>
-        <HeroBanner/>
+        <main>
+          <Navbarr/>
+          <Spacer y={1}/>
+          <HeroBanner/>
+          <Spacer y={3} />
+          <Grid.Container gap={2} justify={"center"}>
+            {products.map((product) => (
+              <Grid>
+                <ProductCard product={product} />
+              </Grid>
+            ))}
+          </Grid.Container>
+        </main>
     </>
   )
 }
